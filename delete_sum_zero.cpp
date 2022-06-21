@@ -167,4 +167,33 @@ int main(){
     // print the linked list
     node_operations.print(result);
     std::cout << std::endl;
+
+    head = NULL;
+
+    node_operations.insert(&head, 4);
+    node_operations.insert(&head, 6);
+    node_operations.insert(&head, -10);
+    node_operations.insert(&head, 8);
+    node_operations.insert(&head, 9);
+    node_operations.insert(&head, 10);
+    node_operations.insert(&head, -19);
+    node_operations.insert(&head, 10);
+    node_operations.insert(&head, -18);
+    node_operations.insert(&head, 20);
+    node_operations.insert(&head, 25);
+
+    // print the linked list
+    std::cout << "List contents: ";
+    node_operations.print(head);
+    std::cout << std::endl;
+
+    // std::cout << "Deleted elements: ";
+    // delete the nodes with sum zero
+    result = node_operations.deleteSumZero(&head);
+    // std::cout << std::endl;
+
+    std::cout << "List contents after deleting elements that sum to zero: ";
+    // print the linked list
+    node_operations.print(result);
+    std::cout << std::endl;
 }
