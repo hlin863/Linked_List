@@ -110,15 +110,16 @@ public:
         Node *result_node = NULL;
         class NodeOperations node_operations;
 
-
         // displays the stack contents
-        std::cout << "stack contents: ";
+        // std::cout << "stack contents: ";
         while (!stack.empty()){
-            std::cout << stack.top() << " ";
-            
+            // std::cout << stack.top() << " ";
+            node_operations.insert(&result_node, stack.top());
             stack.pop();
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
+
+        return result_node;
 
     }
 
@@ -157,11 +158,13 @@ int main(){
     node_operations.print(head);
     std::cout << std::endl;
 
-    std::cout << "Deleted elements: ";
+    // std::cout << "Deleted elements: ";
     // delete the nodes with sum zero
-    node_operations.deleteSumZero(&head);
-    std::cout << std::endl;
+    class Node* result = node_operations.deleteSumZero(&head);
+    // std::cout << std::endl;
 
+    std::cout << "List contents after deleting elements that sum to zero: ";
     // print the linked list
-    node_operations.print(head);
+    node_operations.print(result);
+    std::cout << std::endl;
 }
