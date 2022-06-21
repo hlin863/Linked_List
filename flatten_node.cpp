@@ -138,6 +138,7 @@ Node* sortedMerge(Node* a, Node* b)
     
     
 }
+
 Node *flatten(Node *root)
 {
    // Your code here
