@@ -46,21 +46,32 @@ public:
         return slow->data;
     }
 
-    int sum(std::stack<int> &stack){
+    std::vector<int> sum(std::stack<int> &stack){
         int sum = 0;
 
         std::stack<int> temp = stack;
         
+        int index = 0;
+
         while(!temp.empty()){
             // std::cout << temp.top() << " ";
             sum += temp.top();
             temp.pop();
+            if (sum == 0){
+                break;
+            }
+            index++;
         }
 
-        return sum;
+        std::vector<int> result;
+
+        result.push_back(sum);
+        result.push_back(index);
+
+        return result;
     }
 
-    void deleteSumZero(Node **head){
+    Node* deleteSumZero(Node **head){
 
         // initialise a stack to track the variables.
         std::stack<int> stack;
@@ -69,13 +80,26 @@ public:
 
             stack.push((*head)->data);
             
-            std::cout << "size: " << stack.size() << std::endl;
+            // std::cout << "size: " << stack.size() << std::endl;
 
-            if (sum(stack) == 0){
-                std::cout << std::endl;
+            std::vector<int> result = sum(stack);
+
+            if (result[0] == 0){
+
+                /* 
+                    TO-DO:
+                    If there is a list with elements [a, b, c, d, e]
+                    and c + d + e = 0
+                    then we need to delete the elements [c, d, e]
+                    and the remaining elements will be [a, b]
+                */
+                // std::cout << std::endl;
+
+                int i = result[1];
                 // empties the stack;
-                while (!stack.empty()){
+                while (i >= 0){
                     stack.pop();
+                    i--;
                 }
             }
             
@@ -83,10 +107,15 @@ public:
 
         }
 
+        Node *result_node = NULL;
+        class NodeOperations node_operations;
+
+
         // displays the stack contents
         std::cout << "stack contents: ";
         while (!stack.empty()){
             std::cout << stack.top() << " ";
+            
             stack.pop();
         }
         std::cout << std::endl;
